@@ -14,6 +14,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
@@ -27,9 +30,14 @@ import org.springframework.web.client.RestTemplate;
 public class VetSystemRestClient {
 
     final static Logger LOG = Logger.getLogger(VetSystemRestClient.class.getName());
-    final static String BASEURL = "http://localhost:9090/VetSystem";
 
-    public ResponseEntity ListCompanies() {
+    String BASEURL = "http://localhost:9090/ICL_VetSystemAPI";
+
+    public VetSystemRestClient() throws NamingException {
+        Context context = new InitialContext();
+        BASEURL = (String) context.lookup("JNDI/VetSystemAPI");
+    }
+    public List<Company> ListCompanies() {
         LOG.info("executing method ListCompanies - VetSystemRestClient");
         String uri = BASEURL + "/company/";
         RestTemplate restTemplate = new RestTemplate();
@@ -45,61 +53,23 @@ public class VetSystemRestClient {
                     c.setBase64Image(Base64.getEncoder().encodeToString(c.getLogo()));
                 }
             }
+            return response.getBody();
         }
-        return response;
+        return null;
     }
 
-    public ResponseEntity getCompany(Company myCompany) {
+    public Company getCompany(Company company) {
         LOG.info("executing method getCompany - VetSystemRestClient");
-        String uri = BASEURL + "/company/byId?id={id}";
+
+        String uri = BASEURL;
+
         Map<String, String> params = new HashMap<>();
-        params.put("id", myCompany.getCompanyid().toString());
+
+        uri += "/company/byId?id={id}";
+        params.put("id", company.getCompanyid().toString());
 
         RestTemplate restTemplate = new RestTemplate();
         ResponseEntity<Company> response = restTemplate.exchange(uri, HttpMethod.GET, null, new ParameterizedTypeReference<Company>() {
-        }, params);
-
-        HttpStatus status = response.getStatusCode();
-        //LOG.log(Level.INFO, "status{0}", status);
-        if (status == HttpStatus.OK) {
-            Company Response = response.getBody();
-            if (Response.getLogo() != null) {
-                Response.setBase64Image(Base64.getEncoder().encodeToString(Response.getLogo()));
-            }
-            myCompany = Response;
-        }
-        return response;
-    }
-
-    public ResponseEntity ListBranches(Company parent) {
-        LOG.info("executing method ListBranches - VetSystemRestClient");
-        String uri = BASEURL;
-        RestTemplate restTemplate = new RestTemplate();
-        Map<String, String> params = new HashMap<>();
-        ResponseEntity<List<Branch>> response;
-
-        if (parent.getCompanyid() == null) {
-            uri += "/branch/";
-        } else {
-            uri += "/branch/byCompanyId?id={id}";
-            params.put("id", parent.getCompanyid().toString());
-        }
-        LOG.info(uri);
-        response = restTemplate.exchange(uri, HttpMethod.GET, null, new ParameterizedTypeReference<List<Branch>>() {
-        }, params);
-
-        HttpStatus status = response.getStatusCode();
-        return response;
-    }
-
-    public Branch getBranch(Branch myBranch) {
-        LOG.info("executing method getBranch - VetSystemRestClient");
-        String uri = BASEURL + "/branch/byId?id={id}";
-        Map<String, String> params = new HashMap<>();
-        params.put("id", myBranch.getBranchid().toString());
-
-        RestTemplate restTemplate = new RestTemplate();
-        ResponseEntity<Branch> response = restTemplate.exchange(uri, HttpMethod.GET, null, new ParameterizedTypeReference<Branch>() {
         }, params);
 
         HttpStatus status = response.getStatusCode();
@@ -111,7 +81,51 @@ public class VetSystemRestClient {
         return null;
     }
 
-    public List<Branch> ListBranches2(Company parent) {
+    public boolean createCompany(Company company) {
+        LOG.info("executing method createCompany - VetSystemRestClient");
+        String uri = BASEURL + "/company";
+        RestTemplate restTemplate = new RestTemplate();
+        Map<String, Object> params = new HashMap<>();
+
+        company.setIsactive("A");
+
+        ResponseEntity<String> response = restTemplate.postForEntity(uri, company, String.class, params);
+
+        HttpStatus status = response.getStatusCode();
+        LOG.log(Level.INFO, "status{0}", status);
+        String restCall = response.getBody();
+        LOG.info(restCall);
+        if (status == HttpStatus.CREATED) {
+            return true;
+        }
+        //TODO: Throw new exception
+        return false;
+    }
+
+    public boolean UpdateCompany(Company company) {
+        LOG.info("executing method UpdateCompany - VetSystemRestClient");
+        LOG.log(Level.FINE, "Updating company -> {0}", company.getCompanyid());
+        String uri = BASEURL + "/company";
+
+        RestTemplate restTemplate = new RestTemplate();
+
+        HttpEntity<Company> entity = new HttpEntity<>(company);
+        ResponseEntity<Company> response = restTemplate.exchange(uri, HttpMethod.PUT, entity, Company.class);
+
+        HttpStatus status = response.getStatusCode();
+        LOG.log(Level.INFO, "status{0}", status);
+        Company restCall = response.getBody();
+
+        if (status == HttpStatus.OK) {
+            return true;
+        }
+        //TODO: Throw new exception
+        return false;
+    }
+
+    
+    
+    public List<Branch> ListBranches(Company parent) {
         LOG.info("executing method ListBranches2 - VetSystemRestClient");
         String uri = BASEURL;
         RestTemplate restTemplate = new RestTemplate();
@@ -136,6 +150,76 @@ public class VetSystemRestClient {
         return null;
     }
 
+    public Branch getBranch(Branch myBranch) {
+        LOG.info("executing method getBranch - VetSystemRestClient");
+        String uri = BASEURL + "/branch/byId?id={id}";
+        Map<String, String> params = new HashMap<>();
+        params.put("id", myBranch.getBranchid().toString());
+
+        RestTemplate restTemplate = new RestTemplate();
+        ResponseEntity<Branch> response = restTemplate.exchange(uri, HttpMethod.GET, null, new ParameterizedTypeReference<Branch>() {
+        }, params);
+
+        HttpStatus status = response.getStatusCode();
+        LOG.log(Level.INFO, "status{0}", status);
+        if (status == HttpStatus.OK) {
+            return response.getBody();
+        }
+        //TODO: Throw new exception
+        return null;
+    }
+
+    public Boolean createBranch(Branch myBranch) {
+        LOG.info("executing method createBranch - VetSystemRestClient");
+        String uri = BASEURL + "/branch?ParentId={ParentId}";
+       
+        RestTemplate restTemplate = new RestTemplate();
+        Map<String, Object> params = new HashMap<>();
+        Company compTemp = new Company();
+
+        compTemp.setCompanyid(myBranch.getCompanyid());
+        myBranch.setCompany(compTemp);
+
+        myBranch.setIsactive("A");
+
+        params.put("ParentId", myBranch.getBranchid());
+
+        ResponseEntity<String> response = restTemplate.postForEntity(uri, myBranch, String.class, params);
+
+        HttpStatus status = response.getStatusCode();
+        LOG.log(Level.INFO, "status{0}", status);
+        String restCall = response.getBody();
+        LOG.info(restCall);
+        if (status == HttpStatus.CREATED) {
+            return true;
+        }
+        //TODO: Throw new exception
+        return false;
+    }
+
+    public Boolean UpdateBranch(Branch myBranch) {
+        LOG.info("executing method UpdateBranch - VetSystemRestClient");
+        LOG.log(Level.FINE, "Updating branch -> {0}", myBranch.getBranchid());
+        String uri = BASEURL + "/branch";
+
+        RestTemplate restTemplate = new RestTemplate();
+
+        HttpEntity<Branch> entity = new HttpEntity<>(myBranch);
+        ResponseEntity<Branch> response = restTemplate.exchange(uri, HttpMethod.PUT, entity, Branch.class);
+
+        HttpStatus status = response.getStatusCode();
+        LOG.log(Level.INFO, "status{0}", status);
+        Branch restCall = response.getBody();
+
+        if (status == HttpStatus.OK) {
+            return true;
+        }
+        //TODO: Throw new exception
+        return false;
+    }
+    
+    
+    
     // TODO: Create new method in ws
     public List<Employee> ListEmployees(Branch parent) {
         LOG.info("executing method ListEmployees - VetSystemRestClient");
@@ -239,6 +323,8 @@ public class VetSystemRestClient {
         return false;
     }
 
+    
+    
     public List<Vet> ListVets() {
         LOG.info("executing method ListVets - VetSystemRestClient");
         String uri = BASEURL;
@@ -334,6 +420,8 @@ public class VetSystemRestClient {
         return false;
     }
 
+    
+    
     public List<Owner> ListOwners() {
         LOG.info("executing method ListOwners - VetSystemRestClient");
 
@@ -419,6 +507,8 @@ public class VetSystemRestClient {
         return false;
     }
 
+    
+    
     public List<Pet> ListPets(Owner myOwner) {
         LOG.info("executing method ListPets - VetSystemRestClient");
         String uri = BASEURL;
@@ -524,6 +614,8 @@ public class VetSystemRestClient {
         return false;
     }
 
+    
+    
     public List<Checkup> ListCheckups(Vet myVet) {
         LOG.info("executing method ListCheckups - VetSystemRestClient");
         String uri = BASEURL;
@@ -626,6 +718,8 @@ public class VetSystemRestClient {
         return false;
     }
 
+    
+    
     public List<Checkupreport> ListCheckupreports(Checkup parent1, Pet parent2) {
         LOG.info("executing method ListCheckups - VetSystemRestClient");
         String uri = BASEURL;

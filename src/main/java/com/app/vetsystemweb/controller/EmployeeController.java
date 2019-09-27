@@ -108,7 +108,7 @@ public class EmployeeController {
             parent.setCompanyid(companyId);
         }
 
-        List<Branch> myResponseList = restClient.ListBranches2(parent);
+        List<Branch> myResponseList = restClient.ListBranches(parent);
         Map<Integer, String> TempList = new LinkedHashMap<>();
         if (myResponseList != null) {
             if (myResponseList.size() > 1) {

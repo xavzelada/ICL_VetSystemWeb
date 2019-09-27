@@ -97,27 +97,27 @@ public class CheckupreportController {
 
                 for (Checkupreport c : myResponseList) {
                     if (c.getReportnotes() != null) {
-                        try{
-                        c.setReportnotestext(new String(Base64.getDecoder().decode(c.getReportnotes())));
+                        try {
+                            c.setReportnotestext(new String(Base64.getDecoder().decode(c.getReportnotes())));
+                        } catch (Exception ex) {
                         }
-                        catch(Exception ex){}
                     }
                 }
-
-                Map<Integer, String> myList = getVetList();
-                mav.addObject("VetList", myList);
-
-                Map<Integer, String> myList2 = getPetList();
-                mav.addObject("PetList", myList2);
-
-                mav.addObject("myCheckup", parent1);
-                mav.addObject("myPet", parent2);
-                mav.addObject("listResponse", myResponseList);
-                mav.addObject("source", source);
-
-            } else {
-                mav.addObject("errorDescription", "The criteria selected doesn't fit with the data");
             }
+            Map<Integer, String> myList = getVetList();
+            mav.addObject("VetList", myList);
+
+            Map<Integer, String> myList2 = getPetList();
+            mav.addObject("PetList", myList2);
+
+            mav.addObject("myCheckup", parent1);
+            mav.addObject("myPet", parent2);
+            mav.addObject("listResponse", myResponseList);
+            mav.addObject("source", source);
+
+            //else {
+            //    mav.addObject("errorDescription", "The criteria selected doesn't fit with the data");
+            //}
             return mav;
 
         } catch (RestClientException ex) {
@@ -267,10 +267,10 @@ public class CheckupreportController {
             }
 
             if (checkupreport.getReportnotestext() != null) {
-                
-                byte[] encoded;     
+
+                byte[] encoded;
                 encoded = Base64.getEncoder().encode(checkupreport.getReportnotestext().getBytes());
-                
+
                 checkupreport.setReportnotes(encoded);
             }
 

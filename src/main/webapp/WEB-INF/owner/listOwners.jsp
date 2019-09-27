@@ -37,6 +37,7 @@
                         <a class="btn btn-primary btn-sm" href="javascript:history.back()">Back</a>
                     </c:if>
                     <c:if test="${errorDescription==null}">
+                        <a class="btn btn-primary btn-sm" href="../index.htm">Home</a>
                         <a class="btn btn-primary btn-sm" href="newOwner.htm">Create a new owner</a>
                         <input type="hidden" id="source" name="source" value="${source}">
 
@@ -60,7 +61,7 @@
                                         <td>${reg.ownerid}</td>
                                         <td>${reg.name}&nbsp;${reg.surname}</td>
                                         <td>
-                                            <fmt:formatDate type="date" value="${reg.birthdate}" />
+                                            <fmt:formatDate type="date" value="${reg.birthdate}"  pattern="dd-MM-yyyy"  />
                                         </td>
                                         <td>${reg.phonenumber1}</td>
                                         <td>${reg.email}</td>

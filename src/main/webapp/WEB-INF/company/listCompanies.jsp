@@ -33,6 +33,7 @@
                     <h4>Companies registered</h4>
                 </div>
                 <div class="card-body">
+                    <a class="btn btn-primary btn-sm" href="../index.htm">Home</a>
                     <a class="btn btn-primary btn-sm" href="newCompany.htm">Create a new company</a>
                     <table class="table table-hover">
                         <thead>
@@ -75,8 +76,6 @@
                         </tbody>
                     </table>
                     <br>
-                    <a class="btn btn-primary btn-sm" href="newCompany.htm">Create a new company</a>
-                    <a class="btn btn-primary btn-sm" href="javascript:history.back()">Back</a>
                 </div>
             </div>
         </div>

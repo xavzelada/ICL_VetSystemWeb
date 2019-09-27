@@ -59,17 +59,17 @@
                             <label for="address" class="bmd-label-floating">Branch address: </label>
                             <input type="text" name="address" class="form-control" required onpaste="return false;" value="${Branch.address}">
                         </fieldset>
-                        <fieldset class="form-group">
+                        <!-- fieldset class="form-group">
                             <label for="location" class="bmd-label-floating">Location: </label>
                             <input type="text" name="location" class="form-control" required onpaste="return false;" value="${Branch.location}">
-                        </fieldset>
+                        </fieldset -->
                         <fieldset class="form-group">
                             <label for="phonenumber1" class="bmd-label-floating">Phone number 1: </label>
-                            <input type="text" name="phonenumber1" class="form-control" required onpaste="return false;" value="${Branch.phonenumber1}">
+                            <input type="tel" name="phonenumber1" class="form-control" required onpaste="return false;" value="${Branch.phonenumber1}">
                         </fieldset>
                         <fieldset class="form-group">
                             <label for="phonenumber2" class="bmd-label-floating">Phone number 2: </label>
-                            <input type="text" name="phonenumber2" class="form-control" required onpaste="return false;" value="${Branch.phonenumber2}">
+                            <input type="tel" name="phonenumber2" class="form-control" required onpaste="return false;" value="${Branch.phonenumber2}">
                         </fieldset>
                         <input type="submit" value="Submit" class="btn btn-primary btn-sm">
                         <a class="btn btn-primary btn-sm" href="javascript:history.back()">Back</a>

@@ -35,7 +35,7 @@
                     </c:if>
                 </div>
                 <div class="card-body">
-                    
+                    <a class="btn btn-primary btn-sm" href="../index.htm">Home</a>
                     <a class="btn btn-primary btn-sm" href="newBranch.htm">Create a new branch</a>
                     <input type="hidden" id="branchid" name="source" value="${source}">
                     <table class="table table-hover">
@@ -44,7 +44,7 @@
                                 <th></th>
                                 <th>Name</th>
                                 <th>Address</th>
-                                <th>Location</th>
+                                <!-- th>Location</th -->
                                 <th>Phone number 1</th>
                                 <th>Phone number 2</th>
                                 <th>Status</th>
@@ -58,7 +58,7 @@
                                     </td>
                                     <td>${reg.name}</td>
                                     <td>${reg.address}</td>
-                                    <td>${reg.location}</td>
+                                    <!-- td>${reg.location}</td -->
                                     <td>${reg.phonenumber1}</td>
                                     <td>${reg.phonenumber2}</td>
                                     <td>
@@ -83,8 +83,6 @@
                         </tbody>
                     </table>
                     <br>
-                    <a class="btn btn-primary btn-sm" href="newCompany.htm">Create a new company</a>
-                    <a class="btn btn-primary btn-sm" href="javascript:history.back()">Back</a>
                 </div>
             </div>
         </div>

@@ -43,6 +43,7 @@
                         <a class="btn btn-primary btn-sm" href="javascript:history.back()">Back</a>
                     </c:if>
                     <c:if test="${errorDescription==null}">
+                        <a class="btn btn-primary btn-sm" href="../index.htm">Home</a>
                         <a class="btn btn-primary btn-sm" href="newEmployee.htm">Create a new Employee</a>
                         <input type="hidden" id="source" name="source" value="${source}">
 
@@ -53,7 +54,7 @@
                                     <th>Name</th>
                                     <!-- th>Surname</th -->
                                     <th>Birthdate</th>
-                                    <th>Address</th>
+                                    <!-- th>Address</th -->
                                     <th>Phone number 1</th>
                                     <!-- th>Phone number 2</th-->
                                     <th>Personal email</th>
@@ -73,9 +74,9 @@
                                         <td>${reg.name}&nbsp;${reg.surname}</td>
                                         <!-- td>${reg.surname}</td -->
                                         <td>
-                                            <fmt:formatDate type="date" value="${reg.birthdate}" />
+                                            <fmt:formatDate type="date" value="${reg.birthdate}"  pattern="dd-MM-yyyy"  />
                                         </td>
-                                        <td>${reg.address}</td>
+                                        <!-- td>${reg.address}</td -->
                                         <td>${reg.phonenumber1}</td>
                                         <!-- td>${reg.phonenumber2}</td -->
                                         <td>${reg.personalemail}</td>
@@ -113,8 +114,6 @@
                             </tbody>
                         </table>
                         <br>
-                        <a class="btn btn-primary btn-sm" href="newEmployee.htm">Create a new employee</a>
-                        <a class="btn btn-primary btn-sm" href="javascript:history.back()">Back</a>
                     </c:if>
                 </div>
             </div>

@@ -24,11 +24,12 @@
                     <div class="row">
                         <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
                             <div class="hovereffect">
-                                <img class="img-responsive" src="https://www.vistaequitypartners.com/wp-content/uploads/2019/02/VEP_Website_HeaderA_Companies.jpg" alt="">
+                                <img class="img-responsive" src="http://www.matrudev.com/files/register-a-company-720x340.jpg" alt="">
                                 <div class="overlay">
                                     <h2>Companies</h2>
                                     <p>
-                                        <a href="companies/listCompanies.htm">Administration</a>
+                                        <a href="companies/listCompanies.htm">Administration</a><br/>
+                                        <a href="companies/newCompany.htm">New company</a>
                                     </p>
                                 </div>
                             </div>
@@ -40,7 +41,8 @@
                                 <div class="overlay">
                                     <h2>Branches</h2>
                                     <p>
-                                        <a href="#">Administration</a>
+                                        <a href="branches/listBranches.htm">Administration</a><br/>
+                                        <a href="branches/newBranch.htm">New branch</a>
                                     </p>
                                 </div>
                             </div>
@@ -52,7 +54,8 @@
                                 <div class="overlay">
                                     <h2>Employees</h2>
                                     <p>
-                                        <a href="#">Administration</a>
+                                        <a href="employees/listEmployees.htm">Administration</a><br/>
+                                        <a href="employees/newEmployee.htm">New employee</a><br/>
                                     </p>
                                 </div>
                             </div>
@@ -63,7 +66,7 @@
                                 <div class="overlay">
                                     <h2>Vets</h2>
                                     <p>
-                                        <a href="#">Administration</a>
+                                        <a href="vets/listVets.htm">Administration</a>
                                     </p>
                                 </div>
                             </div>
@@ -77,7 +80,8 @@
                                 <div class="overlay">
                                     <h2>Owners</h2>
                                     <p>
-                                        <a href="#">Administration</a>
+                                        <a href="owners/listOwners.htm">Administration</a><br/>
+                                        <a href="owners/newOwner.htm">New owner</a>
                                     </p>
                                 </div>
                             </div>
@@ -89,7 +93,8 @@
                                 <div class="overlay">
                                     <h2>Pets</h2>
                                     <p>
-                                        <a href="#">Administration</a>
+                                        <a href="pets/listPets.htm">Administration</a><br/>
+                                        <a href="pets/newPet.htm">New pet</a>
                                     </p>
                                 </div>
                             </div>
@@ -100,16 +105,13 @@
                                 <div class="overlay">
                                     <h2>Checkups</h2>
                                     <p>
-                                        <a href="#">Administration</a>
+                                        <a href="checkups/listCheckups.htm">Checkups history</a><br/>
+                                        <a href="checkups/newCheckup.htm">New checkup</a>
                                     </p>
                                 </div>
                             </div>
                         </div>
-                        
-                        
-                        
                     </div>
-                    
                     <!-- a class="btn btn-primary btn-sm" href="register.htm ">Register...</a -->
                 </div>
             </div>

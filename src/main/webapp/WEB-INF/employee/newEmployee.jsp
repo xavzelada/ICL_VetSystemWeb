@@ -97,11 +97,11 @@
                         </fieldset>
                         <fieldset class="form-group">
                             <label for="phonenumber1" class="bmd-label-floating">Phone number 1 </label>
-                            <input type="text" name="phonenumber1" class="form-control" required onpaste="return false;" value="${Employee.phonenumber1}">
+                            <input type="tel" name="phonenumber1" class="form-control" required onpaste="return false;" value="${Employee.phonenumber1}">
                         </fieldset>
                         <fieldset class="form-group">
                             <label for="phonenumber2" class="bmd-label-floating">Phone number 2 </label>
-                            <input type="text" name="phonenumber2" class="form-control" required onpaste="return false;" value="${Employee.phonenumber2}">
+                            <input type="tel" name="phonenumber2" class="form-control" required onpaste="return false;" value="${Employee.phonenumber2}">
                         </fieldset>
                         <fieldset class="form-group">
                             <label for="personalemail" class="bmd-label-floating">Personal email </label>

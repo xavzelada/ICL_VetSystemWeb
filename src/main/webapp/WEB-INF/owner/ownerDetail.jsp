@@ -48,8 +48,6 @@
                             <label for="surname" class="bmd-label-floating">Surname </label>
                             <input type="text" name="surname" class="form-control" required onpaste="return false;" value="${Owner.surname}">
                         </fieldset>
-                        
-                        
                         <fieldset class="form-group">
                             <label>Owner photo </label>
                             <br>

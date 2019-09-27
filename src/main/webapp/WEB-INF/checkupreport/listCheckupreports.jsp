@@ -49,7 +49,7 @@
                             <c:if test="${myCheckup != null}">
                                 <h5 class="card-header">Checkup</h5>
                                 <div class="card-body">
-                                    <fmt:formatDate value="${myCheckup.checkupdate}" var="dateString" pattern="yyyy-MM-dd" />
+                                    <fmt:formatDate value="${myCheckup.checkupdate}" var="dateString" pattern="dd-MM-yyyy" />
                                     <p class="card-text">Vet name:
                                         <c:forEach items="${VetList}" var="c">
                                             ${c.key == myCheckup.vetid ? c.value : null}
@@ -68,8 +68,17 @@
                                     <div class="col">
                                         <div class="card-block px-2">
                                             <h4 class="card-title">${myPet.name}</h4>
-                                            <fmt:formatDate value="${myPet.birthdate}" var="dateString" pattern="yyyy-MM-dd" />
-                                            <p class="card-text">Animal type: ${myPet.animaltype}</p>
+                                            <fmt:formatDate value="${myPet.birthdate}" var="dateString" pattern="dd-MM-yyyy" />
+                                            <p class="card-text">Animal type: 
+                                                <c:choose>
+                                                    <c:when test = "${myPet.animaltype == '1'}">Dog</c:when>
+                                                    <c:when test = "${myPet.animaltype == '2'}">Cat</c:when>
+                                                    <c:when test = "${myPet.animaltype == '3'}">Bird</c:when>
+                                                    <c:when test = "${myPet.animaltype == '4'}">Snake</c:when>
+                                                    <c:when test = "${myPet.animaltype == '5'}">Turtle</c:when>
+                                                    <c:when test = "${myPet.animaltype == '6'}">Horse</c:when>
+                                                    <c:otherwise>unknown</c:otherwise>
+                                                </c:choose></p>
                                             <p class="card-text">Breed: ${myPet.breedname}</p>
                                             <p class="card-text">Birth place: ${myPet.birthplace}</p>
                                             <p class="card-text">Birth date: ${dateString}</p>
@@ -91,7 +100,7 @@
                                     </div>
                                     <div id="collapse${counter.count}" class="collapse" aria-labelledby="heading${counter.count}" data-parent="#accordion">
                                         <div class="card-body">
-                                            <p class="card-text">Checkup report ID: ${reg.checkupreportid}</p>
+                                            <!-- p class="card-text">Checkup report ID: ${reg.checkupreportid}</p -->
                                             <p class="card-text">Vet name: 
                                                 <c:forEach items="${VetList}" var="c">
                                                     ${c.key == reg.checkup.vetid ? c.value : null}
@@ -99,8 +108,7 @@
                                             </p>
                                             <p class="card-text">Pet name: ${reg.pet.name}</p>
                                             <label for="reportnotes">Report notes</label>
-                                            <textarea class="form-control" id="reportnotestext" rows="3" disabled>${reg.reportnotestext}</textarea>
-                                            <!-- p class="card-text">Report attachments: ${reg.reportattachment}</p -->
+                                            <textarea class="form-control" id="reportnotestext" rows="10" disabled>${reg.reportnotestext}</textarea>
                                         </div>
                                     </div>
                                 </div>

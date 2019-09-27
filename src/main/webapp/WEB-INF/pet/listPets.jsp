@@ -40,6 +40,7 @@
                         <a class="btn btn-primary btn-sm" href="javascript:history.back()">Back</a>
                     </c:if>
                     <c:if test="${errorDescription==null}">
+                        <a class="btn btn-primary btn-sm" href="../index.htm">Home</a>
                         <a class="btn btn-primary btn-sm" href="newPet.htm">Create a new Pet</a>
                         <input type="hidden" id="source" name="source" value="${source}">
 
@@ -74,7 +75,7 @@
                                         </td>
                                         <td>${reg.breedname}</td>
                                         <td>
-                                            <fmt:formatDate type="date" value="${reg.birthdate}" />
+                                            <fmt:formatDate type="date" value="${reg.birthdate}"  pattern="dd-MM-yyyy" />
                                         </td>
                                         <td>
                                             <div class="switch">
@@ -98,8 +99,6 @@
                             </tbody>
                         </table>
                         <br>
-                        <a class="btn btn-primary btn-sm" href="newPet.htm">Create a new pet</a>
-                        <a class="btn btn-primary btn-sm" href="javascript:history.back()">Back</a>
                     </c:if>
                 </div>
             </div>

@@ -44,6 +44,7 @@
                         <a class="btn btn-primary btn-sm" href="javascript:history.back()">Back</a>
                     </c:if>
                     <c:if test="${errorDescription==null}">
+                        <a class="btn btn-primary btn-sm" href="../index.htm">Home</a>
                         <a class="btn btn-primary btn-sm" href="newCheckup.htm">Create a new checkup</a>
                         <input type="hidden" id="source" name="source" value="${source}">
 
@@ -69,7 +70,7 @@
                                             </c:forEach>
                                         </td>
                                         <td>
-                                            <fmt:formatDate type="date" value="${reg.checkupdate}" />
+                                            <fmt:formatDate type="date"  pattern="dd-MM-yyyy"  value="${reg.checkupdate}" />
                                         </td>
                                         <td>
                                             <div class="switch">
@@ -93,8 +94,6 @@
                             </tbody>
                         </table>
                         <br>
-                        <a class="btn btn-primary btn-sm" href="newCheckup.htm">Create a new checkup</a>
-                        <a class="btn btn-primary btn-sm" href="javascript:history.back()">Back</a>
                     </c:if>
                 </div>
             </div>
