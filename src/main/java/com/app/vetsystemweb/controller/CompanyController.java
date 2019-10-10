@@ -46,7 +46,7 @@ public class CompanyController {
     public ModelAndView CompanyListHandler() {
         ModelAndView mav = new ModelAndView();
         try {
-            System.out.println("executing method CompanyListHandler - CompanyController");
+            LOG.info("executing method CompanyListHandler - CompanyController");
 
             List<Company> myResponseList = restClient.ListCompanies();
             if (myResponseList != null) {
@@ -82,7 +82,7 @@ public class CompanyController {
 
     @RequestMapping(value = "companies/editCompany", method = RequestMethod.GET)
     public ModelAndView NewCompanyHandler(@RequestParam String companyid) {
-        //System.out.println("ejecuta metodo NewCompanyHandler - CompanyController, company id " + companyid);
+        //LOG.info("ejecuta metodo NewCompanyHandler - CompanyController, company id " + companyid);
         ModelAndView mav = new ModelAndView();
         mav.setViewName("company/newCompany");
         if (!companyid.isEmpty()) {
@@ -109,7 +109,7 @@ public class CompanyController {
             HttpSession session,
             Company company) {
         ModelAndView mav = new ModelAndView();
-        System.out.println("ejecuta metodo NewCompanyHandler - CompanyController");
+        LOG.info("ejecuta metodo NewCompanyHandler - CompanyController");
 
         try {
             if (myCompany == null) {
@@ -155,7 +155,7 @@ public class CompanyController {
     public ModelAndView ChangeStatusCompanyHandler(@RequestParam String companyid) {
         ModelAndView mav = new ModelAndView();
         mav.setViewName("company/newCompany");
-        System.out.println("companyid -> " + companyid);
+        LOG.info("companyid -> " + companyid);
         
         if (companyid != null) {
 

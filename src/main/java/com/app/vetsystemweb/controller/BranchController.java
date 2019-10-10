@@ -56,8 +56,8 @@ public class BranchController {
         ModelAndView mav = new ModelAndView();
         mav.setViewName("branch/listBranches");
         try {
-            System.out.println("Executing method getBranchList - BranchController");
-            System.out.println("companyId -> " + companyId);
+            LOG.info("Executing method getBranchList - BranchController");
+            LOG.info("companyId -> " + companyId);
             Company myCompany = new Company();
 
             if (companyId != null) {
@@ -136,7 +136,7 @@ public class BranchController {
 
     @RequestMapping(value = "branches/editBranch", method = RequestMethod.GET)
     public ModelAndView NewBranchHandler(@RequestParam String branchid) {
-        //System.out.println("ejecuta metodo NewBranchHandler - BranchController, branch id " + branchid);
+        //LOG.info("ejecuta metodo NewBranchHandler - BranchController, branch id " + branchid);
         ModelAndView mav = new ModelAndView();
         mav.setViewName("branch/newBranch");
         if (!branchid.isEmpty()) {
@@ -162,8 +162,8 @@ public class BranchController {
     @RequestMapping(value = "branches/newBranch.htm", method = RequestMethod.POST)
     public ModelAndView NewBranchHandler(HttpSession session, Branch branch) {
         ModelAndView mav = new ModelAndView();
-        System.out.println("Executing methor NewBranchHandler - BranchController");
-        System.out.println("branch -> " + ReflectionToStringBuilder.toString(branch));
+        LOG.info("Executing methor NewBranchHandler - BranchController");
+        LOG.info("branch -> " + ReflectionToStringBuilder.toString(branch));
 
         try {
             if (myBranch == null) {
@@ -171,7 +171,7 @@ public class BranchController {
             }
 
             if (branch.getBranchid() == -1) {
-
+                branch.setBranchid(0);
                 branch.setIsactive("A");
 
                 if (restClient.createBranch(branch)) {
@@ -203,7 +203,7 @@ public class BranchController {
     ) {
         ModelAndView mav = new ModelAndView();
         mav.setViewName("branch/index.htm");
-        System.out.println("branchid -> " + branchid);
+        LOG.info("branchid -> " + branchid);
 
         if (branchid != null) {
 

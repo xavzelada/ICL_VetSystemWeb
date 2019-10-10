@@ -101,9 +101,9 @@
                                     <div id="collapse${counter.count}" class="collapse" aria-labelledby="heading${counter.count}" data-parent="#accordion">
                                         <div class="card-body">
                                             <!-- p class="card-text">Checkup report ID: ${reg.checkupreportid}</p -->
-                                            <p class="card-text">Vet name: 
+                                            <p class="card-text">Vet name:
                                                 <c:forEach items="${VetList}" var="c">
-                                                    ${c.key == reg.checkup.vetid ? c.value : null}
+                                                    ${c.key == reg.checkup.vetid ? c.value :  null}
                                                 </c:forEach>
                                             </p>
                                             <p class="card-text">Pet name: ${reg.pet.name}</p>

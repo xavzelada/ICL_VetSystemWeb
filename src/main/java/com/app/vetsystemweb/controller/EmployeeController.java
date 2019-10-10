@@ -55,8 +55,8 @@ public class EmployeeController {
     private ModelAndView getEmployeeList(String branchId, String source) {
         ModelAndView mav = new ModelAndView();
         try {
-            System.out.println("ejecuta metodo getEmployeeList - EmployeeController");
-            System.out.println("branchId -> " + branchId);
+            LOG.info("ejecuta metodo getEmployeeList - EmployeeController");
+            LOG.info("branchId -> " + branchId);
 
             Branch myBranch = new Branch();
 
@@ -143,7 +143,7 @@ public class EmployeeController {
 
     @RequestMapping(value = "employees/editEmployee", method = RequestMethod.GET)
     public ModelAndView EditEmployeeHandler(@RequestParam String employeeid, String companyid) {
-        //System.out.println("ejecuta metodo NewEmployeeHandler - EmployeeController, employee id " + employeeid);
+        //LOG.info("ejecuta metodo NewEmployeeHandler - EmployeeController, employee id " + employeeid);
         ModelAndView mav = new ModelAndView();
         if (employeeid != null) {
 
@@ -170,9 +170,9 @@ public class EmployeeController {
     @RequestMapping(value = "employees/newEmployee.htm", method = RequestMethod.POST)
     public ModelAndView NewEmployeeHandler(@RequestParam CommonsMultipartFile file, HttpSession session, Employee employee) {
         ModelAndView mav = new ModelAndView();
-        System.out.println("Executing methor NewEmployeeHandler - EmployeeController");
-        System.out.println("employee -> " + ReflectionToStringBuilder.toString(employee));
-        //System.out.println("file -> " + file);
+        LOG.info("Executing method NewEmployeeHandler - EmployeeController");
+        LOG.info("employee -> " + ReflectionToStringBuilder.toString(employee));
+        //LOG.info("file -> " + file);
 
         try {
             if (myEmployee == null) {
@@ -222,8 +222,8 @@ public class EmployeeController {
 
         ModelAndView mav = new ModelAndView();
         mav.setViewName("employee/listEmployees.htm");
-        System.out.println("employeeid -> " + employeeid);
-        System.out.println("source -> " + source);
+        LOG.info("employeeid -> " + employeeid);
+        LOG.info("source -> " + source);
         if (employeeid != null) {
 
             Employee tempEmp = new Employee();

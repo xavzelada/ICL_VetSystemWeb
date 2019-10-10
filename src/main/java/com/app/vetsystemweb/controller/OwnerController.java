@@ -51,7 +51,7 @@ public class OwnerController {
     private ModelAndView getOwnerList(String source) {
         ModelAndView mav = new ModelAndView();
         try {
-            System.out.println("executing method getOwnerList - OwnerController");
+            LOG.info("executing method getOwnerList - OwnerController");
 
             List<Owner> myResponseList = restClient.ListOwners();
             if (myResponseList != null) {
@@ -118,9 +118,9 @@ public class OwnerController {
     @RequestMapping(value = "owners/newOwner.htm", method = RequestMethod.POST)
     public ModelAndView NewOwnerHandler(@RequestParam CommonsMultipartFile file, HttpSession session, Owner owner) {
         ModelAndView mav = new ModelAndView();
-        System.out.println("Executing methor NewOwnerHandler - OwnerController");
-        System.out.println("owner -> " + ReflectionToStringBuilder.toString(owner));
-        //System.out.println("file -> " + file);
+        LOG.info("Executing methor NewOwnerHandler - OwnerController");
+        LOG.info("owner -> " + ReflectionToStringBuilder.toString(owner));
+        //LOG.info("file -> " + file);
 
         try {
             if (myOwner == null) {
@@ -167,8 +167,8 @@ public class OwnerController {
 
         ModelAndView mav = new ModelAndView();
         mav.setViewName("owner/listOwners.htm");
-        System.out.println("ownerid -> " + ownerid);
-        System.out.println("source -> " + source);
+        LOG.info("ownerid -> " + ownerid);
+        LOG.info("source -> " + source);
         
         if (ownerid != null) {
 

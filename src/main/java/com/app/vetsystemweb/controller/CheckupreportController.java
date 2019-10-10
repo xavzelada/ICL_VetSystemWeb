@@ -58,9 +58,9 @@ public class CheckupreportController {
         ModelAndView mav = new ModelAndView();
         mav.setViewName("checkupreport/listCheckupreports");
         try {
-            System.out.println("Executing method getCheckupreportList - CheckupreportController");
-            System.out.println("checkupId -> " + checkupId);
-            System.out.println("petId -> " + petId);
+            LOG.info("Executing method getCheckupreportList - CheckupreportController");
+            LOG.info("checkupId -> " + checkupId);
+            LOG.info("petId -> " + petId);
             Checkup parent1 = null;
             Pet parent2 = null;
 
@@ -220,7 +220,7 @@ public class CheckupreportController {
 
     @RequestMapping(value = "checkupreports/editCheckupreport", method = RequestMethod.GET)
     public ModelAndView EditCheckupreportHandler(@RequestParam String checkupreportid) {
-        //System.out.println("ejecuta metodo NewCheckupreportHandler - CheckupreportController, checkupreport id " + checkupreportid);
+        //LOG.info("ejecuta metodo NewCheckupreportHandler - CheckupreportController, checkupreport id " + checkupreportid);
         ModelAndView mav = new ModelAndView();
         mav.setViewName("checkupreport/checkupreportDetail");
 
@@ -251,8 +251,8 @@ public class CheckupreportController {
     @RequestMapping(value = "checkupreports/newCheckupreport.htm", method = RequestMethod.POST)
     public ModelAndView NewCheckupreportHandler(HttpSession session, Checkupreport checkupreport) {
 
-        System.out.println("Executing methor NewCheckupreportHandler - CheckupreportController");
-        System.out.println("checkupreport -> " + ReflectionToStringBuilder.toString(checkupreport));
+        LOG.info("Executing methor NewCheckupreportHandler - CheckupreportController");
+        LOG.info("checkupreport -> " + ReflectionToStringBuilder.toString(checkupreport));
 
         ModelAndView mav = new ModelAndView();
         mav.setViewName("checkupreport/checkupreportDetail");
@@ -290,13 +290,13 @@ public class CheckupreportController {
                 checkupreport.setCheckup(tempCheckup);
                 checkupreport.setPet(tempPet);
                 checkupreport.setIsactive("A");
-                System.out.println("checkupreport 2 -> " + ReflectionToStringBuilder.toString(checkupreport));
+                LOG.info("checkupreport 2 -> " + ReflectionToStringBuilder.toString(checkupreport));
                 if (restClient.createCheckupreport(checkupreport)) {
                     return new ModelAndView("redirect:/checkupreports/adminCheckup.htm?checkupid=" + checkupreport.getCheckupid());
                 }
                 mav.addObject("errorDescription", "We know that an unexpected error has occurred, please try again later");
             } else {
-                System.out.println("checkupreport 3 -> " + ReflectionToStringBuilder.toString(checkupreport));
+                LOG.info("checkupreport 3 -> " + ReflectionToStringBuilder.toString(checkupreport));
                 if (restClient.UpdateCheckupreport(checkupreport)) {
                     return new ModelAndView("redirect:/checkupreports/listCheckupreports.htm");
                 }
@@ -316,8 +316,8 @@ public class CheckupreportController {
 
         ModelAndView mav = new ModelAndView();
         mav.setViewName("checkupreport/listCheckupreports");
-        System.out.println("checkupreportid -> " + checkupreportid);
-        System.out.println("source -> " + source);
+        LOG.info("checkupreportid -> " + checkupreportid);
+        LOG.info("source -> " + source);
         if (checkupreportid != null) {
 
             Checkupreport tempCheckupreport = new Checkupreport();

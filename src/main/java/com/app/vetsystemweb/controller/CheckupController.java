@@ -54,8 +54,8 @@ public class CheckupController {
         ModelAndView mav = new ModelAndView();
         mav.setViewName("checkup/listCheckups");
         try {
-            System.out.println("Executing method getCheckupList - CheckupController");
-            System.out.println("vetId -> " + vetId);
+            LOG.info("Executing method getCheckupList - CheckupController");
+            LOG.info("vetId -> " + vetId);
             Vet parent = new Vet();
 
             if (vetId != null && !vetId.isEmpty()) {
@@ -142,7 +142,7 @@ public class CheckupController {
 
     @RequestMapping(value = "checkups/editCheckup", method = RequestMethod.GET)
     public ModelAndView EditCheckupHandler(@RequestParam String checkupid, String vetid) {
-        //System.out.println("ejecuta metodo NewCheckupHandler - CheckupController, checkup id " + checkupid);
+        //LOG.info("ejecuta metodo NewCheckupHandler - CheckupController, checkup id " + checkupid);
         ModelAndView mav = new ModelAndView();
         mav.setViewName("checkup/checkupDetail");
 
@@ -168,8 +168,8 @@ public class CheckupController {
     @RequestMapping(value = "checkups/newCheckup.htm", method = RequestMethod.POST)
     public ModelAndView NewCheckupHandler(HttpSession session, Checkup checkup) {
 
-        System.out.println("Executing methor NewCheckupHandler - CheckupController");
-        System.out.println("checkup -> " + ReflectionToStringBuilder.toString(checkup));
+        LOG.info("Executing methor NewCheckupHandler - CheckupController");
+        LOG.info("checkup -> " + ReflectionToStringBuilder.toString(checkup));
 
         ModelAndView mav = new ModelAndView();
         mav.setViewName("checkup/checkupDetail");
@@ -185,13 +185,13 @@ public class CheckupController {
                 tempVet.setVetid(checkup.getVetid());
                 checkup.setVet(tempVet);
                 checkup.setIsactive("A");
-                System.out.println("checkup 2 -> " + ReflectionToStringBuilder.toString(checkup));
+                LOG.info("checkup 2 -> " + ReflectionToStringBuilder.toString(checkup));
                 if (restClient.createCheckup(checkup)) {
                     return new ModelAndView("redirect:/checkups/listCheckups.htm");
                 }
                 mav.addObject("errorDescription", "We know that an unexpected error has occurred, please try again later");
             } else {
-                System.out.println("checkup 3 -> " + ReflectionToStringBuilder.toString(checkup));
+                LOG.info("checkup 3 -> " + ReflectionToStringBuilder.toString(checkup));
                 if (restClient.UpdateCheckup(checkup)) {
                     return new ModelAndView("redirect:/checkups/listCheckups.htm");
                 }
@@ -211,8 +211,8 @@ public class CheckupController {
 
         ModelAndView mav = new ModelAndView();
         mav.setViewName("checkup/listCheckups");
-        System.out.println("checkupid -> " + checkupid);
-        System.out.println("source -> " + source);
+        LOG.info("checkupid -> " + checkupid);
+        LOG.info("source -> " + source);
         if (checkupid != null) {
 
             Checkup tempCheckup = new Checkup();

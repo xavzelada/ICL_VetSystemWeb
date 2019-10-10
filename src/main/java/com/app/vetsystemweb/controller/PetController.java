@@ -55,8 +55,8 @@ public class PetController {
         ModelAndView mav = new ModelAndView();
         mav.setViewName("pet/listPets");
         try {
-            System.out.println("Executing method getPetList - PetController");
-            System.out.println("ownerId -> " + ownerId);
+            LOG.info("Executing method getPetList - PetController");
+            LOG.info("ownerId -> " + ownerId);
             Owner myOwner = new Owner();
 
             if (ownerId != null && !ownerId.isEmpty()) {
@@ -135,7 +135,7 @@ public class PetController {
 
     @RequestMapping(value = "pets/editPet", method = RequestMethod.GET)
     public ModelAndView EditPetHandler(@RequestParam String petid, String ownerid) {
-        //System.out.println("ejecuta metodo NewPetHandler - PetController, pet id " + petid);
+        //LOG.info("ejecuta metodo NewPetHandler - PetController, pet id " + petid);
         ModelAndView mav = new ModelAndView();
         mav.setViewName("pet/petDetail");
         
@@ -164,13 +164,13 @@ public class PetController {
     @RequestMapping(value = "pets/newPet.htm", method = RequestMethod.POST)
     public ModelAndView NewPetHandler(@RequestParam CommonsMultipartFile file, HttpSession session, Pet pet) {
         
-        System.out.println("Executing methor NewPetHandler - PetController");
-        System.out.println("pet -> " + ReflectionToStringBuilder.toString(pet));
+        LOG.info("Executing methor NewPetHandler - PetController");
+        LOG.info("pet -> " + ReflectionToStringBuilder.toString(pet));
         
         ModelAndView mav = new ModelAndView();
         mav.setViewName("pet/petDetail");
         
-        //System.out.println("file -> " + file);
+        //LOG.info("file -> " + file);
 
         try {
             if (myPet == null) {
@@ -221,8 +221,8 @@ public class PetController {
 
         ModelAndView mav = new ModelAndView();
         mav.setViewName("pet/listPets");
-        System.out.println("petid -> " + petid);
-        System.out.println("source -> " + source);
+        LOG.info("petid -> " + petid);
+        LOG.info("source -> " + source);
         if (petid != null) {
 
             Pet tempPet = new Pet();

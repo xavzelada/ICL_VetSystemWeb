@@ -57,7 +57,7 @@ public class Branch  implements java.io.Serializable {
         return this.branchid;
     }
     
-    public void setBranchid(int branchid) {
+    public void setBranchid(Integer branchid) {
         this.branchid = branchid;
     }
 

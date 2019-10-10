@@ -25,7 +25,7 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class VetController {
 
-    final static Logger logger = Logger.getLogger(VetController.class.getName());
+    final static Logger LOG = Logger.getLogger(VetController.class.getName());
 
     @Autowired
     VetSystemRestClient restClient;
@@ -39,14 +39,14 @@ public class VetController {
 
     @RequestMapping("vets/index.htm")
     public ModelAndView MenuHandler() {
-        System.out.println("Executing method MenuHandler - VetController");
+        LOG.info("Executing method MenuHandler - VetController");
         return VetListHandler();
     }
 
     private ModelAndView getVetList(String source) {
         ModelAndView mav = new ModelAndView();
         try {
-            System.out.println("Executing method getVetList - VetController");
+            LOG.info("Executing method getVetList - VetController");
 
             List<Vet> myResponseList = restClient.ListVets();
 
@@ -63,7 +63,7 @@ public class VetController {
 
         } catch (RestClientException ex) {
             mav.addObject("errorDescription", "We know that an unexpected error has occurred, please try again later");
-            logger.warning(ex.getMessage());
+            LOG.warning(ex.getMessage());
             mav.setViewName("vets/VetDetail.htm");
             return mav;
         }
@@ -71,13 +71,13 @@ public class VetController {
 
     @RequestMapping(value = "vets/listVets.htm")
     public ModelAndView VetListHandler() {
-        System.out.println("Executing method VetListHandler - VetController");
+        LOG.info("Executing method VetListHandler - VetController");
         return getVetList("listVets.htm");
     }
 
     @RequestMapping(value = "vets/VetDetail.htm", method = RequestMethod.GET)
     public ModelAndView NewVetHandler(String employeeid) {
-        System.out.println("Executing method NewVetHandler - VetController(GET)");
+        LOG.info("Executing method NewVetHandler - VetController(GET)");
         ModelAndView mav = new ModelAndView();
         mav.setViewName("vet/VetDetail");
 
@@ -92,7 +92,7 @@ public class VetController {
 
     @RequestMapping(value = "vets/editVet", method = RequestMethod.GET)
     public ModelAndView EditVetHandler(@RequestParam String vetid, String employeeid) {
-        System.out.println("Executing method EditVetHandler - VetController");
+        LOG.info("Executing method EditVetHandler - VetController");
         ModelAndView mav = new ModelAndView();
         mav.setViewName("vet/VetDetail");
 
@@ -120,7 +120,7 @@ public class VetController {
                 myVet.setVetid(-1);
             }
             
-            System.out.println("vet -> " + ReflectionToStringBuilder.toString(myVet));
+            LOG.info("vet -> " + ReflectionToStringBuilder.toString(myVet));
             mav.addObject("Vet", myVet);
         } else {
 
@@ -132,9 +132,9 @@ public class VetController {
 
     @RequestMapping(value = "vets/VetDetail.htm", method = RequestMethod.POST)
     public ModelAndView NewVetHandler(HttpSession session, Vet vet, String _licensetype) {
-        System.out.println("Executing method NewVetHandler - VetController(POST)");
-        System.out.println("vet -> " + ReflectionToStringBuilder.toString(vet));
-        System.out.println("_licensetype -> " + _licensetype);
+        LOG.info("Executing method NewVetHandler - VetController(POST)");
+        LOG.info("vet -> " + ReflectionToStringBuilder.toString(vet));
+        LOG.info("_licensetype -> " + _licensetype);
 
         ModelAndView mav = new ModelAndView();
         mav.setViewName("vets/VetDetail.htm");
@@ -151,7 +151,7 @@ public class VetController {
 
             vet.setEmployee(tempParent);
             vet.setLicencetype(_licensetype);
-            System.out.println("vet 2 -> " + ReflectionToStringBuilder.toString(vet));
+            LOG.info("vet 2 -> " + ReflectionToStringBuilder.toString(vet));
             if (vet.getVetid() == -1) {
                 vet.setIsactive("A");
                 if (restClient.createVet(vet)) {
@@ -168,7 +168,7 @@ public class VetController {
             return mav;
         } catch (RestClientException ex) {
             mav.addObject("errorDescription", "We know that an unexpected error has occurred, please try again later");
-            logger.warning(ex.getMessage());
+            LOG.warning(ex.getMessage());
             mav.setViewName("vets/VetDetail.htm");
             return mav;
         }
@@ -176,9 +176,9 @@ public class VetController {
 
     @RequestMapping(value = "vets/ChangeStatusVet", method = RequestMethod.GET)
     public ModelAndView ChangeStatusVetHandler(@RequestParam String vetid, @RequestParam String source) {
-        System.out.println("Executing method ChangeStatusVetHandler - VetController");
-        System.out.println("vetid -> " + vetid);
-        System.out.println("source -> " + source);
+        LOG.info("Executing method ChangeStatusVetHandler - VetController");
+        LOG.info("vetid -> " + vetid);
+        LOG.info("source -> " + source);
 
         ModelAndView mav = new ModelAndView();
         mav.setViewName("vet/listVets.htm");
